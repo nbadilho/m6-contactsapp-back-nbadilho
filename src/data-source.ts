@@ -1,41 +1,42 @@
 import "dotenv/config";
 import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
-import path from "path";
+import { User } from "./entities/user.entity";
+import { Contact } from "./entities/contact.entity";
+import { InitialMigration1684893292424 } from "./migrations/1684893292424-InitialMigration";
 
-const dataSourceConfig = (): DataSourceOptions => {
-  const entitiesPath: string = path.join(__dirname, "./entities/**.{ts,js}");
-  const migrationsPath: string = path.join(
-    __dirname,
-    "./migrations/**.{ts,js}"
-  );
-
+const setDataSourceConfig = (): DataSourceOptions => {
+	const nodeEnv = process.env.NODE_ENV;
   const dbUrl: string | undefined = process.env.DATABASE_URL;
 
   if (!dbUrl) {
     throw new Error("Env var DATABASE_URL does not exists");
   }
 
-  const nodeEnv: string | undefined = process.env.NODE_ENV;
-
-  if (nodeEnv === "test") {
-    return {
-      type: "sqlite",
-      database: ":memory:",
-      synchronize: true,
-      entities: [entitiesPath],
-    };
-  }
-
-  return {
-    type: "postgres",
+	if (nodeEnv === "production") {
+		return {
+			type: "postgres",
+			url: dbUrl,
+			entities: [User,Contact],
+			migrations: [InitialMigration1684893292424],
+		};
+	}
+	if (nodeEnv === "test") {
+		return {
+			type: "sqlite",
+			database: ":memory:",
+			entities: [User,Contact],
+			synchronize: true,
+		};
+	}
+	return {
+		type: "postgres",
+		synchronize: false,
     url: dbUrl,
-    synchronize: false,
-    logging: true,
-    migrations: [migrationsPath],
-    entities: [entitiesPath],
-  };
+		logging: true,
+		entities: [User,Contact],
+		migrations: [InitialMigration1684893292424],
+	};
 };
 
-export const AppDataSource = new DataSource(dataSourceConfig());
-
+export const AppDataSource = new DataSource(setDataSourceConfig());
