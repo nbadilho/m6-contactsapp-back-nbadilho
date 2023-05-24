@@ -116,6 +116,19 @@ O objeto User é definido como:
 
 ---
 
+## Schema usuário
+
+```
+export const userSchema = z.object({
+    name: z.string().min(2).max(45),
+    email: z.string().email().max(45),
+    phone: z.string().min(8).max(13),
+    password: z.string().max(120),
+  });
+```
+
+---
+
 ### 1.1. **Criação de Usuário**
 
 [ Voltar para os Endpoints ](#4-endpoints)
@@ -159,8 +172,8 @@ Content-type: application/json
 ### Possíveis Erros:
 | Código do Erro |       Descrição       |
 |----------------|-----------------------|
-| 409 Conflict   | Email already exists. |
-| 409 Conflict   | Phone already exists. |
+| 409 Conflict   | Email already exists. |-> usuário com esse email já existe
+| 409 Conflict   | Phone already exists. | ->usuário com esse telefona já existe
 
 ---
 
@@ -235,7 +248,7 @@ Content-type: application/json
  ### Possíveis Erros:
 | Código do Erro |       Descrição       |
 |----------------|-----------------------|
-| 409 Conflict   | Email already exists. |
+| 409 Conflict   | Email already exists. |-> usuário com esse email já existe
 
 ### 1.4. **Deleta usuário**
 
@@ -338,6 +351,17 @@ O objeto Contact é definido como:
 | PATCH    | /contacts/id | Atualiza um contato específico        |
 | DELETE   | /contacts/id | Deleta um contato específico          |
 
+---
+
+## Schema contato
+
+```
+export const contactSchema = z.object({
+    name: z.string().min(2).max(45),
+    email: z.string().email().max(45),
+    phone: z.string().min(8).max(13),
+  });
+```
 ---
 
 ### 3.1. **Criação de contato**
