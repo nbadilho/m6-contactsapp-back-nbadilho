@@ -10,11 +10,14 @@ export const checkValidContactMiddleware = async (
   next: NextFunction
 ): Promise<void> => {
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
+  const userId: string = res.locals.userId
+
   if (req.body.email) {
-    const findContactEmail = await contactRepository.findOne({
+    const findContactEmail = await contactRepository.find({
       where: {
         email: req.body.email,
-      },
+        user: { id: parseInt(userId) }
+      }
     });
   
     if (findContactEmail) {
@@ -25,9 +28,10 @@ export const checkValidContactMiddleware = async (
 
   if (req.body.phone) {
    
-  const findContactPhone = await contactRepository.findOne({
+  const findContactPhone = await contactRepository.find({
     where: {
       phone: req.body.phone,
+      user: { id: parseInt(userId) }
     },
   });
 
