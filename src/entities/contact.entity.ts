@@ -19,7 +19,7 @@ import { ManyToOne } from "typeorm";
     @Column({ length: 45, unique: true })
     email: string;
   
-    @Column({ length: 13})
+    @Column({ length: 13,unique:true})
     phone: string;
   
     @ManyToOne(() => User)
