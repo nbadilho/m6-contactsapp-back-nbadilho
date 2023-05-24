@@ -3,7 +3,8 @@ import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { User } from "./entities/user.entity";
 import { Contact } from "./entities/contact.entity";
-import { InitialMigration1684893292424 } from "./migrations/1684893292424-InitialMigration";
+import { NewMigration1684947055420 } from "./migrations/1684947055420-NewMigration";
+
 
 const setDataSourceConfig = (): DataSourceOptions => {
 	const nodeEnv = process.env.NODE_ENV;
@@ -18,7 +19,7 @@ const setDataSourceConfig = (): DataSourceOptions => {
 			type: "postgres",
 			url: dbUrl,
 			entities: [User,Contact],
-			migrations: [InitialMigration1684893292424],
+			migrations: [NewMigration1684947055420],
 		};
 	}
 	if (nodeEnv === "test") {
@@ -35,7 +36,7 @@ const setDataSourceConfig = (): DataSourceOptions => {
     url: dbUrl,
 		logging: true,
 		entities: [User,Contact],
-		migrations: [InitialMigration1684893292424],
+		migrations: [NewMigration1684947055420],
 	};
 };
 
