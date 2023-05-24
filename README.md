@@ -8,8 +8,7 @@
     - [Instalando Dependências](#31-instalando-dependências)
     - [Variáveis de Ambiente](#32-variáveis-de-ambiente)
     - [Migrations](#33-migrations)
-- [Autenticação](#4-autenticação)
-- [Endpoints](#5-endpoints)
+- [Endpoints](#4-endpoints)
 
 ---
 
@@ -211,6 +210,14 @@ Vazio
 ```
 ---
 
+### Possíveis Erros:
+| Código do Erro |       Descrição       |
+|----------------|-----------------------|
+| 401 Unauthorized  | jwt must be provided.  | ->token necessário
+
+---
+
+
 ### 1.3. **Atualiza usuário**
 
 [ Voltar aos Endpoints ](#4-endpoints)
@@ -248,6 +255,7 @@ Content-type: application/json
  ### Possíveis Erros:
 | Código do Erro |       Descrição       |
 |----------------|-----------------------|
+| 401 Unauthorized  | jwt must be provided.  | ->token necessário
 | 409 Conflict   | Email already exists. |-> usuário com esse email já existe
 
 ### 1.4. **Deleta usuário**
