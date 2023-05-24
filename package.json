@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs"
@@ -28,6 +30,8 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.11.0",
     "reflect-metadata": "^0.1.13",
+    "swagger-jsdoc": "5.0.1",
+    "swagger-ui-express": "^4.6.3",
     "typeorm": "^0.3.11",
     "zod": "^3.21.4"
   },

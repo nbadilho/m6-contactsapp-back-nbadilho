@@ -18,3 +18,4 @@ export const returnUserSchemaNoPassword = userSchema
   });
 
 export const updateUserSchema = userSchema.partial();
+
